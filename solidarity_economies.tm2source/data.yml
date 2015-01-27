@@ -1,0 +1,25 @@
+_prefs: 
+  disabled: []
+  inspector: false
+  mapid: zingbot.2a442ca7
+  rev: s-49b0de77
+  saveCenter: false
+attribution: ''
+center: 
+  - -73.9946
+  - 40.7586
+  - 12
+description: ''
+Layer: 
+  - id: CT_All_StatesGeoThree
+    Datasource: 
+      file: /Users/Design/Dropbox/Work/linepointpath/Creative Time/CT_All_StatesGeoThree.tif
+      type: gdal
+    description: ''
+    fields: {}
+    properties: 
+      "buffer-size": 0
+    srs: +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over
+maxzoom: 14
+minzoom: 10
+name: solidarity Economies
