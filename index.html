@@ -1,0 +1,48 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Solidarity Economies</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <style type="text/css">
+        html, body { width: 100%; height: 100%; margin: 0; }
+        #map1, #map2 { width: 49.5%; height: 100%; }
+        #map1 { float: left; }
+        #map2 { float: right; }
+    </style>
+</head>
+
+<body>
+    <div id="map1"></div>
+    <div id="map2"></div>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet-src.js"></script>
+    <script src="js/L.Map.Sync.js"></script>
+
+    <script type="text/javascript">
+   
+         var center = [40.727760, -73.987218];
+          var center2 = [40.7301, -73.7832];
+
+        var layer1 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.2a442ca7/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
+        var layer2 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.2a442ca7/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg', {
+            attribution: 'William Powhida'
+        });
+        var map1 = L.map('map1', {
+            layers: [layer1],
+            center: center,
+            zoom: 13,
+        });
+        map1.attributionControl.setPrefix('');
+        var map2 = L.map('map2', {
+            layers: [layer2],
+            center: center2,
+            zoom: 13,
+            zoomControl: false
+        });
+        map1.sync(map2);
+        map2.sync(map1);
+    </script>
+</body>
+</html>
