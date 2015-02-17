@@ -8,41 +8,91 @@
 
     <style type="text/css">
         html, body { width: 100%; height: 100%; margin: 0; }
-        #map1, #map2 { width: 49.5%; height: 100%; }
-        #map1 { float: left; }
-        #map2 { float: right; }
+        #map1, #map2, #map3 { width: 33%; height: 100%; }
+        #map1 {
+            position: absolute;
+left: 0%;
+        }
+        #map2 {
+            position: absolute;
+            left: 33%;
+
+        }
+        #map3 {
+            position: absolute;
+            left: 66%;
+
+        }
     </style>
 </head>
 
 <body>
     <div id="map1"></div>
     <div id="map2"></div>
+    <div id="map3"></div>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet-src.js"></script>
+    <script type="text/javascript" src="../js/leafletcoordinates.js"></script>
+    <link rel="stylesheet" href="../css/leafletcoordinates.css"/>
     <script src="js/L.Map.Sync.js"></script>
 
     <script type="text/javascript">
-   
-         var center = [40.727760, -73.987218];
-          var center2 = [40.7301, -73.7832];
 
-        var layer1 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.2a442ca7/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
-        var layer2 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.2a442ca7/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg', {
-            attribution: 'William Powhida'
-        });
+        var center = [40.727760, -73.987218];
+        var center2 = [40.7301, -73.7832];
+        var zoom = 8;
+
+        var layer1 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.5jowp14i/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg#8/40.639/-66.725');
+        var layer2 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.wil1h5mi/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
+        var layer3 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.aty8ehfr/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
+      
         var map1 = L.map('map1', {
             layers: [layer1],
-            center: center,
-            zoom: 13,
+            center: [40.543, -79.538],
+            zoom: zoom,
         });
+
+
         map1.attributionControl.setPrefix('');
+
+
         var map2 = L.map('map2', {
             layers: [layer2],
-            center: center2,
-            zoom: 13,
-            zoomControl: false
+            center: [40.64,-74.16],
+            zoom: zoom,
         });
-        map1.sync(map2);
-        map2.sync(map1);
+
+         var map3 = L.map('map3', {
+            layers: [layer3],
+            center: [40.548, -66.3],
+            zoom: zoom,
+        });
+        
+        map1.sync(map2,{noInitialSync:true}); // disables initial synchronisation of the maps.//
+        map1.sync(map3,{noInitialSync:true}); 
+        map2.sync(map1,{noInitialSync:true}); 
+        map2.sync(map3,{noInitialSync:true}); 
+        map3.sync(map1,{noInitialSync:true}); 
+        map3.sync(map2,{noInitialSync:true}); 
+
+console.log('word');
+
+        L.control.coordinates().addTo(map1);
+        //add configured controls
+        L.control.coordinates({
+            position:"bottomleft",
+            decimals:2,
+            decimalSeperator:",",
+            labelTemplateLat:"Latitude: {y}",
+            labelTemplateLng:"Longitude: {x}"
+        }).addTo(map1);
+        L.control.coordinates({
+            position:"topright",
+            useDMS:true,
+            labelTemplateLat:"N {y}",
+            labelTemplateLng:"E {x}",
+            useLatLngOrder:true
+        }).addTo(map);
+    
     </script>
 </body>
 </html>
