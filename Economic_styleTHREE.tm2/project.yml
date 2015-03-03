@@ -1,0 +1,25 @@
+_prefs: 
+  mapid: zingbot.dbfa5f5a
+  saveCenter: true
+_properties: {}
+attribution: ''
+bounds: 
+  - -180
+  - -85.0511
+  - 180
+  - 85.0511
+center: 
+  - -73.1419
+  - 40.567
+  - 9
+description: ''
+format: "png8:m=h"
+interactivity_layer: ''
+layers: null
+maxzoom: 9
+minzoom: 0
+name: Economic_style Three
+source: "mapbox:///zingbot.f393bf2f"
+styles: 
+  - style.mss
+template: ''

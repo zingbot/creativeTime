@@ -1,0 +1,25 @@
+_prefs: 
+  mapid: zingbot.e59690a2
+  saveCenter: true
+_properties: {}
+attribution: ''
+bounds: 
+  - -180
+  - -85.0511
+  - 180
+  - 85.0511
+center: 
+  - -74.2923
+  - 42.0187
+  - 9
+description: ''
+format: "png8:m=h"
+interactivity_layer: ''
+layers: null
+maxzoom: 11
+minzoom: 4
+name: Idealistic_style One
+source: "mapbox:///zingbot.1882d862"
+styles: 
+  - style.mss
+template: ''

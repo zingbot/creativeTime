@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Solidarity Economies</title>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+
+    <style type="text/css">
+        html, body { width: 100%; height: 100%; margin: 0; }
+       // #map1, #map2, #map3 { width: 33%; height: 100%; }
+        #map1 {
+            position: absolute;
+left: 0%;
+        }
+        #map2 {
+            position: absolute;
+            left: 33%;
+
+        }
+        #map3 {
+            position: absolute;
+            left: 66%;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map1"></div>
+    <div id="map2"></div>
+    <div id="map3"></div>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet-src.js"></script>
+    <script type="text/javascript" src="../js/leafletcoordinates.js"></script>
+    <link rel="stylesheet" href="../css/leafletcoordinates.css"/>
+    <script src="js/L.Map.Sync.js"></script>
+
+    <script type="text/javascript">
+
+        
+        var zoom = 8;
+
+        var layer1 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.5jowp14i/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
+        var layer2 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.wil1h5mi/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
+        var layer3 = L.tileLayer('https://{s}.tiles.mapbox.com/v4/zingbot.aty8ehfr/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiemluZ2JvdCIsImEiOiJJU1NqTEdrIn0.hzY0M7fDqT5nMAgCffDCbg');
+      
+        var map1 = L.map('map1', {
+            layers: [layer1],
+            center: [40.5, -79],
+            zoom: zoom,
+            zoomControl: false,
+        });
+
+
+        map1.attributionControl.setPrefix('');
+
+
+        var map2 = L.map('map2', {
+            layers: [layer2],
+            center: [40.5,-73],
+            zoom: zoom,
+        });
+
+         var map3 = L.map('map3', {
+            layers: [layer3],
+            center: [40.5, -67],
+            zoom: zoom,
+            zoomControl: false,
+        });
+        
+        map2.sync(map1,{noInitialSync:true}); // disables initial synchronisation of the maps.//
+        map2.sync(map3,{noInitialSync:true}); 
+        // map2.sync(map1,{noInitialSync:true}); 
+        // map2.sync(map3,{noInitialSync:true}); 
+        // map3.sync(map1,{noInitialSync:true}); 
+        // map3.sync(map2,{noInitialSync:true}); 
+
+console.log('word');
+
+  
+    </script>
+</body>
+</html>
