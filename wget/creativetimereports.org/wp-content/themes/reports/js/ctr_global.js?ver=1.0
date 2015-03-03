@@ -1,0 +1,163 @@
+/**
+ * 		creative_time js module:
+ * 			ctr_global.js
+ *
+ *		desc:
+ * 			The primary JavaScript module for Creative Time	Reports		
+ * 		
+ * 		requires:
+ * 			jQuery
+ */
+
+var creative_time = (function( app, $ ) {
+	
+	/* define new module */
+	app.ctr_global = (function($){
+
+		// private vars
+		var _name = '';
+		var _gllry = window.location.search.replace( '?gllry=', '' );
+			
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		
+		function _init() {
+			if( _gllry == 'opn' ) {
+				$( '.slideshow' ).magnificPopup( 'open' );
+			}							
+		}
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */	
+			
+		$(document).ready(function() {	
+
+			$('li.slide-content-wrapper').first().addClass('active');
+
+			$('#reports_gallery').slides({
+				crossfade: true,
+				effect: 'fade',
+				fadeSpeed: 350,
+				generateNextPrev: false,
+				generatePagination: false,
+			});
+
+			$('#reports-tweets').tweet({
+				modpath: '/twitter_ctr/',
+				avatar_size: 32,
+				count: 4,
+				filter: function(t){ return ! /^@\w+/.test(t.tweet_raw_text); },
+				template: "{text}",			
+				username: "artistsreport"
+			});
+
+			$('#reports-feed').facebookfeed({
+				access_token: 'AAACiOnUMZA14BANFd6Aj0SxH11dsKR92lUza33LZAmjB2omA7eyBI8rFIXwJRLc0ZCdP7UZBPpPdExySLXPZBYv6ZAnKKJjhgZD',
+				id: 'creativetimereports', //id of the facebook entity
+				query: {limit:3}
+			});	
+
+			if (!$('body').hasClass('home')) {
+				$('#main').css('background-color','#606060');
+			}
+
+			if ($(window).height()<800) {
+				$('#reports_gallery .slides_container').css('height', '450px');
+				$('#reports_gallery .slides_container .slide').css('height', '450px');
+				$('#reports_gallery .slides_container .slide img').css('height', '450px');
+			}
+
+			$('#reports_gallery .pagination').css('display', 'block');
+
+		});	
+
+		$('.reports-posts li.reports-post').last().addClass('last');
+		$('.contributor li.contributor').last().addClass('last');
+		$('.contributor ul.article-list li').last().addClass('last');
+		$('#reports_gallery .pagination li').last().addClass('last');
+
+		$(window).resize( function() {
+			if ($(window).height()<800) {
+				$('#reports_gallery .slides_container').css('height', '510px');
+				$('#reports_gallery .slides_container .slide').css('height', '510px');
+				$('#reports_gallery .slides_container .slide img').css('height', '450px');
+				$('#reports_gallery .slides_container .caption').css('top', '460px')
+			} else if ($(window).height()>800) {
+				$('#reports_gallery .slides_container').css('height', '560px');
+				$('#reports_gallery .slides_container .slide').css('height', '560px');
+				$('#reports_gallery .slides_container .slide img').css('height', '510px');
+				$('#reports_gallery .slides_container .caption').css('top', '520px')				
+			}		
+		});
+
+		function reports_border() {
+			if ( $( '.reports-posts .grid_3' ).height() > $( '.reports-posts .grid_9' ).height() ) {
+				$( '.reports-posts .grid_3' ).css( { 'border-left' : '1px solid #eaeaea', 'margin-left' : '-1px' } );
+			} else if ( $( '.reports-posts .grid_9').height() > $( '.reports-posts .grid_3' ).height() ) {
+				$( '.reports-posts .grid_9' ).css( { 'border-right' : '1px solid #eaeaea', 'margin-right' : '-1px' } );
+			}
+		}
+		setTimeout ( reports_border, 2000 );
+
+		function ctr360_border() {
+			if ( $( '.voices-360' ).height() > $( '.content-360' ).height() ) {
+				$( '.voices-360' ).css( { 'border-left' : '1px solid #dadada', 'margin-left' : '-1px' } );
+			} else if ( $( '.content-360' ).height() > $( '.voices-360' ).height() ) {
+				$( '.content-360' ).css( { 'border-right' : '1px solid #dadada', 'margin-right' : '-1px' } );
+			}
+		}
+		setTimeout ( ctr360_border, 500 );
+
+		$('#article_dropdown').hide();
+
+		$('#menu-item-1570 a').each(function(){
+		    
+		  var $link = $(this),
+		      $div = $('#article_dropdown'),
+		      div_or_link_is_hovered = false,
+		      show = function(){
+		         div_or_link_is_hovered = true;
+		         $div.fadeIn();
+		         $link.addClass('active');
+		      }, 
+		      hide = function(){
+		          div_or_link_is_hovered = false
+		          setTimeout(function(){
+		              if(div_or_link_is_hovered === false){
+		                  $div.fadeOut();
+		                  $link.removeClass('active');  
+		              };
+		          }, 100);   
+		      };
+    
+
+		    $link.add($div).hover(show, hide);       
+		        
+		});
+
+		$( window ).scroll(function () { 
+		   		if( $( window ).scrollTop() > 100 ) {
+		   			$( '.arrow' ).css( 'left' , '58px' );
+
+		   		} else if( $( window ).scrollTop() < 100 ) {
+		   			$( '.arrow' ).css( 'left' , '28px' );
+		   		}
+    		});
+
+		/* return public-facing methods and/or vars */
+		return {
+			init : _init
+		};
+		
+	}($));
+	
+	return app; /* return augmented app object */
+	
+}( creative_time || {}, jQuery )); /* import app if exists, or create new; import jQuery */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/* initialize on doc ready */
+jQuery(document).ready(function() {
+	
+	creative_time.ctr_global.init();
+	
+});

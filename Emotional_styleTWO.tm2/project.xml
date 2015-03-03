@@ -6,8 +6,8 @@
   <Parameter name="bounds">-180,-85.0511,180,85.0511</Parameter>
   <Parameter name="center">-73.1419,40.567,9</Parameter>
   <Parameter name="format">png8:m=h</Parameter>
-  <Parameter name="maxzoom">9</Parameter>
-  <Parameter name="minzoom">0</Parameter>
+  <Parameter name="maxzoom">13</Parameter>
+  <Parameter name="minzoom">6</Parameter>
   <Parameter name="name"><![CDATA[Emotional_style Two]]></Parameter>
   <Parameter name="source"><![CDATA[mapbox:///zingbot.6e7fa45d]]></Parameter>
 </Parameters>

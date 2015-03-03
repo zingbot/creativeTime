@@ -1,0 +1,70 @@
+/**
+ * 		creative_time js module:
+ * 			ct_sort.js
+ *
+ *		desc:
+ * 			Contains all functions realted to sorting presentations and projects
+ * 		
+ * 		requires:
+ * 			jQuery
+ */
+
+var creative_time = (function( app, $ ) {
+	
+	/* define new module */
+	app.ct_sort = (function($){
+		
+		// private vars
+		var _nameSorted = false;
+			
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		
+		function _init() {
+			
+		}
+		
+		$( '#presentation-order' ).change(function() {
+			$('#order-form').submit();
+		});
+
+		$( '#presentation-year' ).change(function() {
+			$('#year-form').submit();
+		});
+		
+		$('#project-sort').change(function() {
+			if ($('#project-sort').val() =='date') {
+				$('#projects ul.name').hide();
+				$('#projects ul.year').show(500);
+			} else if ($('#project-sort').val() == 'name') {
+				if (_nameSorted == false) {
+					$('#projects ul.year').hide();
+					$('#projects li').each(function(){
+	        			$(this).clone().appendTo('#projects ul.name');
+	      			});
+					$('#projects ul.name li').tsort( {data:'name'} );
+					$('#projects ul.name').show(500);
+					_nameSorted = true;
+				} else if (_nameSorted == true) {
+					$('#projects ul.year').hide();					
+					$('#projects ul.name').show(500);
+				}
+			}
+		});	
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		
+		/* return public-facing methods and/or vars */
+		return {
+			init : _init
+		};
+		
+	}($));
+	
+	return app; /* return augmented app object */
+	
+}( creative_time || {}, jQuery )); /* import app if exists, or create new; import jQuery */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+// register this module for initialization
+// forbes.bootstrap.register( creative_time.ct_sort.init );

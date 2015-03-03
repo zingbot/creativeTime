@@ -1,0 +1,229 @@
+/**
+ * 		creative_time js module:
+ * 			ct_global.js
+ *
+ *		desc:
+ * 			The primary JavaScript module for Creative Time				
+ * 		
+ * 		requires:
+ * 			jQuery
+ */
+
+var creative_time = (function( app, $ ) {
+	
+	/* define new module */
+	app.ct_global = (function($){
+		
+		// private vars
+		var _name = '',
+		_path = window.location.pathname.split( '/' ),
+		_loc = _path[1],
+		_loc_2 = _path[2];
+			
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		
+		function _init() {				
+		}
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */		
+			
+		$(document).ready(function() {		
+			$("#twitter").hover(
+		        function() {$('#twitter img').attr("src","/summit/wp-content/themes/creativetime/images/icons/twitter_white.png");},
+		        function() {$('#twitter img').attr("src","/summit/wp-content/themes/creativetime/images/icons/twitter_gray.png");
+		    });
+	
+			$("#facebook").hover(
+				function() {$('#facebook img').attr("src","/summit/wp-content/themes/creativetime/images/icons/facebook_white.png");},
+				function() {$('#facebook img').attr("src","/summit/wp-content/themes/creativetime/images/icons/facebook_gray.png");
+			});	
+	
+			$("#tumblr").hover(
+				function() {$('#tumblr img').attr("src","/summit/wp-content/themes/creativetime/images/icons/tumblr_white.png");},
+				function() {$('#tumblr img').attr("src","/summit/wp-content/themes/creativetime/images/icons/tumblr_gray.png");
+			});	
+			
+			$( '#slides .prev.ct' ).hover(
+				function() {
+					$( '#slides .prev.ct img' ).attr( 'src', '/wp-content/themes/creativetime/images/icons/arrow_left_white.png' );
+					$( '#slides .prev.ct' ).animate({ backgroundColor: 'black' }, 350);
+				},
+				function() {
+					$( '#slides .prev.ct img' ).attr( 'src', '/wp-content/themes/creativetime/images/icons/arrow_left_black.png');
+					$( '#slides .prev.ct' ).animate({ backgroundColor: 'white' }, 350);
+			});	
+			
+			$( '#slides .next.ct' ).hover(
+				function() {
+					$( '#slides .next.ct img' ).attr( 'src', '/wp-content/themes/creativetime/images/icons/arrow_right_white.png' );
+					$( '#slides .next.ct' ).animate({ backgroundColor: 'black' }, 350);
+			},
+				function() {
+					$( '#slides .next.ct img' ).attr( 'src', '/wp-content/themes/creativetime/images/icons/arrow_right_black.png' );
+					$( '#slides .next.ct' ).animate({ backgroundColor: 'white' }, 350);
+			});
+
+
+		   	$( 'img.top' ).hover(
+		        function() {
+		        	$( '.top' ).attr( 'src' , '/wp-content/themes/creativetime/images/icons/arrow_up_black.png' );
+					$(this).animate({ backgroundColor: 'white' }, 350);
+		        },
+		        function() {
+		        	$( '.top' ).attr( 'src' , '/wp-content/themes/creativetime/images/icons/arrow_up_white.png' );
+					$(this).animate({ backgroundColor: 'black' }, 350);
+		    });
+		});
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */					
+		
+		//@TODO: jp1971 move to cts_global.js
+		$('#sidebar li').last().addClass('last');	
+		
+		$('.content-news ul li').last().addClass('last');
+		$('.events ul li').last().addClass('last');	
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		
+		if ( _loc.search( 'about' ) != -1 ) {
+			$( '#menu-item-35 a' ).addClass( 'current' );
+		}
+		
+		if ( _loc.search( 'projects' ) != -1 ) {
+			$( '#menu-item-34 a' ).addClass( 'current' );
+		}
+		
+		if ( _loc.search( 'events' ) != -1 ) {
+			$( '#menu-item-33 a' ).addClass( 'current' );
+		}
+		
+		if ( _loc.search( 'news' ) != -1 || _loc.search( 'blog' ) != -1 ) {
+			$( '#menu-item-32 a' ).addClass( 'current' );
+		}
+		
+		if ( _loc.search( 'shop' ) != -1 ) {
+			$( '#menu-item-62 a' ).addClass( 'current' );
+		}	
+		
+		if ( _loc.search( 'join' ) != -1 ) {
+			$( '#menu-item-31 a' ).addClass( 'current' );
+		}			
+		
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */		
+		
+		$("#ticker").tweet({
+			modpath: '/twitter/',
+			avatar_size: 0,
+			count: 10,
+			filter: function(t){ return ! /^@\w+/.test(t.tweet_raw_text); },	  
+			loading_text: "loading ...",
+			page: 1,
+			username: "creativetimenyc"
+		}).bind("loaded", function() {
+		  var ul = $(this).find(".tweet_list");
+		  var ticker = function() {
+		    setTimeout(function() {
+		      ul.find('li:first').animate( {marginTop: '-2em'}, 0, function() {
+		        $(this).detach().appendTo(ul).removeAttr('style');
+		      });
+		      ticker();
+		    }, 5000);
+		  };
+		  ticker();
+		});	
+		
+		$( '#tweets' ).tweet({
+			modpath: '/twitter/',
+			avatar_size: 32,
+			count: 5,
+			filter: function(t){ return ! /^@\w+/.test(t.tweet_raw_text); },
+			template: "{text}",			
+			username: "creativetimenyc"
+		});
+		
+		$( '#feed' ).facebookfeed({
+			access_token: 'AAACiOnUMZA14BANFd6Aj0SxH11dsKR92lUza33LZAmjB2omA7eyBI8rFIXwJRLc0ZCdP7UZBPpPdExySLXPZBYv6ZAnKKJjhgZD',
+			id: 'creativetime', //id of the facebook entity
+			query: {limit:3}
+		});	
+
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+		
+		//@TODO: jp1971 is there a cleaner way to do this?
+		function news_border() {
+			if ( _loc == 'news') {
+				if ( $( '.sidebar-news' ).height() > $( '#primary-news .grid_8' ).height() ) {
+					$( '.sidebar-news' ).css( { 'border-left' : '1px solid #eaeaea', 'margin-left' : '-1px' } );
+				} else if ( $( '#primary-news .grid_8').height() > $( '.sidebar-news' ).height() ) {
+					$( '#primary-news .grid_8' ).css( { 'border-right' : '1px solid #eaeaea', 'margin-right' : '-1px' } );
+					$( '.sidebar-news' ).addClass( 'border-bottom' );
+				}
+			} else if (_loc == 'blog' ) {
+				if ( $( '.sidebar-news' ).height() > $( '#primary-detail .grid_8' ).height() ) {
+					$( '.sidebar-news' ).css( { 'border-left' : '1px solid #eaeaea', 'margin-left' : '-1px' } );
+				} else if ( $( '#primary-detail .grid_8').height() > $( '.sidebar-news' ).height() ) {
+					$( '#primary-detail .grid_8' ).css( { 'border-right' : '1px solid #eaeaea', 'margin-right' : '-1px' } );
+					$( '.sidebar-news' ).addClass( 'border-bottom' );
+				}				
+			}
+		}
+		if ( $( '.sidebar-news' ).length > 0 ) { setTimeout ( news_border, 2000 ) };
+	
+		function events_border() {
+			if ( _loc == 'events' && _loc_2.length == 0 ) {
+				if ( $( '.sidebar-events' ).height() > $( '#primary-events .grid_8' ).height() ) {
+					$( '.sidebar-events' ).css( { 'border-left' : '1px solid #eaeaea', 'margin-left' : '-1px' } );
+				} else if ( $( '#primary-events .grid_8').height() > $( '.sidebar-events' ).height() ) {
+					$( '#primary-events .grid_8' ).css( { 'border-right' : '1px solid #eaeaea', 'margin-right' : '-1px' } );
+					$( '.sidebar-events' ).addClass( 'border-bottom' );			
+				}
+			}else if ( _loc_2 == 'tag' ) {
+				if ( $( '.sidebar-events' ).height() > $( '#primary-events-archive .grid_8' ).height() ) {
+					$( '.sidebar-events' ).css( { 'border-left' : '1px solid #eaeaea', 'margin-left' : '-1px' } );
+				} else if ( $( '#primary-events-archive .grid_8').height() > $( '.sidebar-events' ).height() ) {
+					$( '#primary-events-archive .grid_8' ).css( { 'border-right' : '1px solid #eaeaea', 'margin-right' : '-1px' } );
+					$( '.sidebar-events' ).addClass( 'border-bottom' );			
+				}
+			} else if ( _loc_2 == 'event' ) {
+				if ( $( '.sidebar-events' ).height() > $( '#primary-detail .grid_8' ).height() ) {
+					$( '.sidebar-events' ).css( { 'border-left' : '1px solid #eaeaea', 'margin-left' : '-1px' } );
+				} else if ( $( '#primary-detail .grid_8').height() > $( '.sidebar-events' ).height() ) {
+					$( '#primary-detail .grid_8' ).css( { 'border-right' : '1px solid #eaeaea', 'margin-right' : '-1px' } );
+					$( '.sidebar-events' ).addClass( 'border-bottom' );			
+				}
+			}				
+		}
+		if ( $( '.sidebar-events' ).length > 0 ) { setTimeout ( events_border, 2000 ) };
+
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+		   	$( window ).scroll(function () { 
+		   		if( $( window ).scrollTop() > 100 ) {
+		   			$( '.top' ).css( 'width' , '40px' );
+
+		   		} else if( $( window ).scrollTop() < 100 ) {
+		   			$( '.top' ).css( 'width' , '0px' );
+		   		}
+    		});
+
+		   	$( '.top' ).click(function () { 
+		   		$( 'html, body' ).animate( {scrollTop:0}, 'slow' );
+				return false;		   		
+		   	});	 
+
+		/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */				
+		
+		/* return public-facing methods and/or vars */
+		return {
+			init : _init
+		};
+		
+	}($));
+	
+	return app; /* return augmented app object */
+	
+}( creative_time || {}, jQuery )); /* import app if exists, or create new; import jQuery */
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+// register this module for initialization

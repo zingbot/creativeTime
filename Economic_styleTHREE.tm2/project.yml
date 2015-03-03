@@ -16,8 +16,8 @@ description: ''
 format: "png8:m=h"
 interactivity_layer: ''
 layers: null
-maxzoom: 9
-minzoom: 0
+maxzoom: 13
+minzoom: 6
 name: Economic_style Three
 source: "mapbox:///zingbot.f393bf2f"
 styles: 

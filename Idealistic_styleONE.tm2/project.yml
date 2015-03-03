@@ -16,8 +16,8 @@ description: ''
 format: "png8:m=h"
 interactivity_layer: ''
 layers: null
-maxzoom: 11
-minzoom: 4
+maxzoom: 13
+minzoom: 6
 name: Idealistic_style One
 source: "mapbox:///zingbot.1882d862"
 styles: 
