@@ -26,7 +26,7 @@
             position: absolute;
             left: 0%;
             width: 100%;
-            height: 100%;
+            height: 70%;
             top: 0%;
 
         }
@@ -39,9 +39,18 @@
             bottom: 0%;
             border-color: #fff;
             border-style: solid;
-    border-width: 5px;
+            border-width: 5px;
+        }
 
-
+    #caption {
+    position: relative;
+    z-index: 10000;
+    text-align: center;
+    font-weight: bolder;
+    background-color: #000;
+    color: #fff;
+left:45%;
+        }
 
         }
     #iframeOne{
@@ -54,9 +63,9 @@
 </head>
 
 <body>
-    <div id="map1"></div>
-    <div id="map2"></div>
-    <div id="map3"></div>
+    <div id="map1"><span id="caption"> Idealistic</span></div>
+    <div id="map2"><span id="caption"> Emotional</span></div>
+    <div id="map3"><span id="caption"> Economic</span></div>
     <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet-src.js"></script>
     <script type="text/javascript" src="../js/leafletcoordinates.js"></script>
     <link rel="stylesheet" href="../css/leafletcoordinates.css"/>
@@ -96,11 +105,10 @@
         
         map2.sync(map1); // disables initial synchronisation of the maps.//
         map2.sync(map3); 
-         map2.sync(map1); 
-         map2.sync(map3); 
         map3.sync(map1); 
         map3.sync(map2); 
-
+        map1.sync(map2);
+        map1.sync(map3);
 console.log('word');
 
   
