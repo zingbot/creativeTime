@@ -92,8 +92,12 @@ left:45%;
         var map2 = L.map('map2', {
             layers: [layer2],
             center: [40.5,-73],
+             minZoom: 7,
+            maxZoom: 10,
             zoom: zoom,
             zoomControl: true,
+            touchZoom: false,
+            scrollWheelZoom: false,
         });
 
         //  var map3 = L.map('map3', {

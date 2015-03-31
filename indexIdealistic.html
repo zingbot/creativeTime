@@ -83,8 +83,12 @@ left:45%;
         var map1 = L.map('map1', {
             layers: [layer1],
             center: [40.5,-73.2],
+             minZoom: 7,
+            maxZoom: 10,
             zoom: zoom,
             zoomControl: true,
+            touchZoom: false,
+            scrollWheelZoom: false,
         });
 
  map1.attributionControl.setPrefix('');
@@ -92,15 +96,23 @@ left:45%;
         var map2 = L.map('map2', {
             layers: [layer2],
             center: [40.5,-73],
+             minZoom: 7,
+            maxZoom: 10,
             zoom: zoom,
             zoomControl: true,
+            touchZoom: false,
+            scrollWheelZoom: false,
         });
 
          var map3 = L.map('map3', {
             layers: [layer3],
             center: [40.5,-73],
+             minZoom: 7,
+            maxZoom: 10,
             zoom: zoom,
             zoomControl: true,
+            touchZoom: false,
+            scrollWheelZoom: false,
         });
         
         map2.sync(map1); // disables initial synchronisation of the maps.//
